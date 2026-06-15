@@ -776,6 +776,14 @@ export class AgentSession {
 	}
 
 	/**
+	 * Get the currently active tools as executable objects.
+	 * Returns a shallow copy of the tools currently set on the agent.
+	 */
+	getActiveExecutableTools(): AgentTool[] {
+		return this.agent.state.tools.slice();
+	}
+
+	/**
 	 * Get all configured tools with name, description, parameter schema, prompt guidelines, and source metadata.
 	 */
 	getAllTools(): ToolInfo[] {
@@ -2229,6 +2237,7 @@ export class AgentSession {
 					this.sessionManager.appendLabelChange(entryId, label);
 				},
 				getActiveTools: () => this.getActiveToolNames(),
+				getActiveExecutableTools: () => this.getActiveExecutableTools(),
 				getAllTools: () => this.getAllTools(),
 				setActiveTools: (toolNames) => this.setActiveToolsByName(toolNames),
 				refreshTools: () => this._refreshToolRegistry(),
